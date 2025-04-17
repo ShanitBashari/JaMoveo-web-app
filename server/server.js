@@ -21,7 +21,7 @@ app.use("/api/user", userRoutes);
 app.use("/api/song", songRoutes);
 
 // Serve the React app for any unknown routes
-app.get('*', (req, res) => {
+app.get(/(.*)/, (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
