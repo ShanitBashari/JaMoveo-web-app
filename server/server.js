@@ -3,6 +3,7 @@ const http = require('http');
 const mongoose = require('mongoose');
 const {Server} = require('socket.io');
 const cors = require('cors');
+const path = require('path');
 const userRoutes = require("./routes/userRoutes");
 const songRoutes = require("./routes/songRoutes");
 
@@ -11,17 +12,27 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../client/build')));
+
+// API Routes
 app.use("/api/user", userRoutes);
 app.use("/api/song", songRoutes);
+
+// Serve the React app for any unknown routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+});
 
 const server = http.createServer(app);
 
 mongoose.connect(process.env.MONGO_URL)
     .then(() => {
-        console.log('Connected to MongoDB .');
+        console.log('Connected to MongoDB.');
     })
     .catch((err) => {
-        console.error('Error connecting to MongoDB - ', err);
+        console.error('Error connecting to MongoDB -', err);
     });
 
 const io = new Server(server, {
@@ -29,7 +40,7 @@ const io = new Server(server, {
         origin: "*",
         methods: ["GET", "POST"],
     },
-})
+});
 
 const userSockets = new Map(); // A map to track socket IDs and roles .
 /*
@@ -39,14 +50,14 @@ const userSockets = new Map(); // A map to track socket IDs and roles .
 global.currentLiveSession = null;
 
 io.on('connection', (socket) => {
-    console.log(`User connected - ${socket.id} .`);
+    console.log(`User connected - ${socket.id}.`);
 
-    socket.on('registerUser', ({role}) => {
+    socket.on('registerUser', ({ role }) => {
         userSockets.set(socket.id, role);
     });
 
     socket.on('adminSongSelected', (song) => {
-        global.currentLiveSession  = song;
+        global.currentLiveSession = song;
         io.emit('navigateToLive', song);
     });
 
@@ -56,7 +67,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('disconnect', () => {
-        console.log(`User disconnected - ${socket.id} .`);
+        console.log(`User disconnected - ${socket.id}.`);
 
         // Check if the admin has disconnected .
         const role = userSockets.get(socket.id);
@@ -69,6 +80,8 @@ io.on('connection', (socket) => {
     });
 });
 
-server.listen(process.env.PORT, () => {
-    console.log(`server is running , listen port ${process.env.PORT} .`);
-})
+// Start the server
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}.`);
+});
