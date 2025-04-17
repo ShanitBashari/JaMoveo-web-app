@@ -13,7 +13,7 @@ function App() {
   return (
       <BrowserRouter>
         <Routes>
-          <Route path="/main" element={<MainPage/>}/>
+          <Route path="/" element={<MainPage/>}/>
           <Route path="/adminRegistration" element={<AdminRegistrationPage/>}/>
           <Route path="/playerRegistration" element={<PlayerRegistrationPage/>}/>
           <Route path="/login" element={<LoginPage/>}/>
