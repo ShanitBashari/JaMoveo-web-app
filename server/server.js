@@ -3,7 +3,6 @@ const http = require('http');
 const mongoose = require('mongoose');
 const {Server} = require('socket.io');
 const cors = require('cors');
-const path = require('path');
 const userRoutes = require("./routes/userRoutes");
 const songRoutes = require("./routes/songRoutes");
 
@@ -19,17 +18,8 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// // Serve static files from the React app
-// app.use(express.static(path.join(__dirname, '../client/build')));
-
-// API Routes
 app.use("/api/user", userRoutes);
 app.use("/api/song", songRoutes);
-
-// // Serve the React app for any unknown routes
-// app.get(/(.*)/, (req, res) => {
-//     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-// });
 
 const server = http.createServer(app);
 
@@ -86,10 +76,6 @@ io.on('connection', (socket) => {
         }
     });
 });
-
-app.get("/", (req, res) => {
-    res.status(201).json({message: "connected to backend!!!!"});
-})
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
