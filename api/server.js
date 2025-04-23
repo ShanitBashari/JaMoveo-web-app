@@ -33,7 +33,7 @@ app.get(/(.*)/, (req, res) => {
 
 const server = http.createServer(app);
 
-mongoose.connect("mongodb+srv://shanityerushalmi9:hCjFlo4Tpv1Pfjr4@cluster0.vzgy8hp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect(process.env.MONGO_URL)
     .then(() => {
         console.log('Connected to MongoDB.');
     })
