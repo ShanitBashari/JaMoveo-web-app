@@ -19,17 +19,17 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../client/build')));
+// // Serve static files from the React app
+// app.use(express.static(path.join(__dirname, '../client/build')));
 
 // API Routes
 app.use("/api/user", userRoutes);
 app.use("/api/song", songRoutes);
 
-// Serve the React app for any unknown routes
-app.get(/(.*)/, (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
-});
+// // Serve the React app for any unknown routes
+// app.get(/(.*)/, (req, res) => {
+//     res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
+// });
 
 const server = http.createServer(app);
 
