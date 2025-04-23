@@ -1,5 +1,5 @@
 import {io} from 'socket.io-client';
 
-const socket = io('https://ja-moveo-web-app.vercel.app');
+const socket = io('https://jamoveo-web-app-shanit-bashari.onrender.com');
 
 export default socket;

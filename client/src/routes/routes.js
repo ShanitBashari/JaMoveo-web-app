@@ -1,4 +1,4 @@
-export const host = "https://ja-moveo-web-app.vercel.app";
+export const host = "https://jamoveo-web-app-shanit-bashari.onrender.com";
 
 export const registerAdmin = `${host}/api/user/registerAdmin`;
 export const registerPlayer = `${host}/api/user/registerPlayer`;
