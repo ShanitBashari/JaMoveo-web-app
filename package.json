@@ -1,0 +1,25 @@
+{
+  "name": "jamoveo",
+  "version": "1.0.0",
+  "description": "The JaMoveo application is designed to streamline music rehearsals for the Moveo band.",
+  "main": "index.js",
+  "scripts": {
+    "install-server": "cd server && npm install",
+    "start-server": "cd server && node server.js",
+    "install-client": "cd client && npm install",
+    "build-client": "cd client && npm run build",
+    "start-client": "cd client && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShanitBashari/JaMoveo-web-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ShanitBashari/JaMoveo-web-app/issues"
+  },
+  "homepage": "https://github.com/ShanitBashari/JaMoveo-web-app#readme"
+}
