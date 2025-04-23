@@ -1,4 +1,4 @@
-export const host = "http://localhost:5000";
+export const host = "https://ja-moveo-web-app.vercel.app";
 
 export const registerAdmin = `${host}/api/user/registerAdmin`;
 export const registerPlayer = `${host}/api/user/registerPlayer`;

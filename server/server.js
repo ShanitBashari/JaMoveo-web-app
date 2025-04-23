@@ -11,7 +11,13 @@ require('dotenv').config();
 
 const app = express();
 app.use(express.json());
+
 app.use(cors());
+const corsOptions = {
+    origin: "*",
+    methods: ["GET", "POST"],
+};
+app.use(cors(corsOptions));
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../client/build')));
@@ -43,6 +49,7 @@ const io = new Server(server, {
 });
 
 const userSockets = new Map(); // A map to track socket IDs and roles .
+
 /*
  * A global variable to indicate if there is rehearsal session going on .
  * If there is - it holds the current song , else - null .
@@ -80,8 +87,7 @@ io.on('connection', (socket) => {
     });
 });
 
-// Start the server
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
 });
