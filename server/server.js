@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const {Server} = require('socket.io');
 const cors = require('cors');
 const path = require('path');
-const userRoutes = require("../server/routes/userRoutes");
-const songRoutes = require("../server/routes/songRoutes");
+const userRoutes = require("./routes/userRoutes");
+const songRoutes = require("./routes/songRoutes");
 
 require('dotenv').config();
 
